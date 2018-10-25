@@ -8,3 +8,5 @@ This is a sentiment analysis on Yelp review
 
 [Standford cs225n Attention](http://web.stanford.edu/class/cs224n/lectures/lecture12.pdf)
 
+[Text Classification](https://github.com/TobiasLee/Text-Classification)
+
