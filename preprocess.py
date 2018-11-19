@@ -52,15 +52,23 @@ def data_sample_csv(data_path, input_file_name, sample_file_name):
                 writer.writerow(review_dict.values())
         print('converting complete !!!')
 
-def split_feature_label(data_path, sample_file_name, data_export):
-    df = pd.read_csv(data_path + sample_file_name, low_memory=False) 
-    print('finished load data')
-    num_samples = len(df['stars'])
-    with open(data_export + 'train/sample_train.train','w') as f:
-        for i in range(num_samples):
-            label = str(df['stars'][i])
-            raw_text = df['text'][i]
-            f.write(label + '\t\t\t'  + raw_text + '\n')
+def split_feature_label(data_path, sample_file_name, data_export, train_data_file_name):
+    if os.path.isfile(data_export + train_data_file_name):
+        print(train_data_file_name  + ' exists !!!')
+    else:
+        df = pd.read_csv(data_path + sample_file_name, low_memory=True) 
+        print('finished load data')
+        num_samples = len(df['stars'])
+        with open(data_export + train_data_file_name,'w') as f:
+            for i in tqdm(range(num_samples)):
+                label = str(df['stars'][i])
+                raw_text = df['text'][i]
+                try:
+                    f.write(label + '\t\t\t'  + raw_text + '\n')
+                except TypeError:
+                    print(label)
+                    print(raw_text)
+        print('file wirtten has completed !!!')
 
     
     
